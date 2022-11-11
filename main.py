@@ -1,14 +1,20 @@
-a = {'1': 4, '2': 5}
+from person import Person
+import datetime
 
-ntt = 0
-liu = 0
+ntt=Person(0)
+liu=Person(0)
 while True:
     name = input('请输入你的名字')
-    type = input("请输入类别")
-    score = a.get(type)
-    if name == 'liu':
-        liu += score
-        print(f"刘双喜分数:{liu}")
-    elif name == 'ntt':
-        ntt += score
-        print("农婷婷分数:", ntt)
+    action_id = input("请输入动作id")
+    if name=="liu":
+        liu.action(action_id)
+    elif name=="ntt":
+        ntt.action(action_id)
+
+
+    print(f"刘双喜的分数为：{liu.score}")
+    print(f"农婷婷的分数为：{ntt.score}")
+    print(f'当前农婷婷做：{ntt.action_and_time}')
+
+
+
