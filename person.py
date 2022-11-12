@@ -17,3 +17,4 @@ class Person:
 
         self.score = self.score + cur_score
         self.action_and_time = self.action_and_time + [action_id, str(cur_time)]
+
