@@ -51,6 +51,9 @@ class Person():
         # 1.按行循环工作表
         for row in sheet:
             row_value = []
+            # 如果当前行第一个单元格的值是编号,则说明规则部分已经读取完成了
+            if row[0].value == '编号':
+                break
             # 2.循环每一行
             for cell in row:
                 # 3.将每一行的单元格的值储存到列表
@@ -72,12 +75,16 @@ class Person():
         """
         data = load_workbook('data.xlsx')
         sheet = data[self.name]
+        end_row = sheet.max_row
+        end_col = sheet.max_column
         # 保存做事的时间和事情记录
         for i in range(0,len(self.action_and_time)):
-            sheet[f'A{31+i}'] = i
-            sheet[f'B{31+i}'] = self.action_and_time[i][0]
-            sheet[f'C{31+i}'] = self.action_and_time[i][1]
-
+            last_index = sheet[f'A{end_row+i}'].value
+            sheet[f'A{end_row+i +1}'] = 1+ int(last_index) if last_index !='编号' else 1
+            sheet[f'B{end_row+i+1}'] = self.action_and_time[i][0]
+            sheet[f'C{end_row+i+1}'] = self.action_and_time[i][1]
+        self.action_and_time = []
         # 保存分数
         sheet['B1'] = self.score
         data.save('data.xlsx')
+        data.close()

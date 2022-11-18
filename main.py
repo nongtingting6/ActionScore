@@ -25,6 +25,7 @@ while True:
     elif re.findall('\D+? \d', _input):  # 用正则表达式判断输入是不是符合预期
         # 分解输入信息ntt 1
         name, action_id = _input.split(' ')
+        name = name.lower()
         obj = obj_dict.get(name)
         obj.person_do_action(action_id)
     else:
